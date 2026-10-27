@@ -256,6 +256,24 @@
     margin-top: 0;
   }
 
+  .sobre-conteudo {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .foto-tecnico {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .sobre-conteudo p:first-child {
+    margin-top: 0;
+  }
+
   footer {
     margin-top: 48px;
     padding-top: 16px;
@@ -301,6 +319,14 @@
     vertical-align: -3px;
     margin-right: 8px;
   }
+
+  @media (max-width: 600px) {
+    .sobre-conteudo {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
 </style>
 </head>
 
@@ -318,7 +344,13 @@
 
 <section>
   <h2>Sobre nós</h2>
-  <p>Trabalhamos com informática desde 2011. A Informática Valinhos atende de forma 100% remota, a partir de Valinhos/SP, clientes de toda a região. O contato é feito pelo WhatsApp e o atendimento acontece por acesso remoto com AnyDesk — assim resolvemos problemas de software, configuração e otimização sem que você precise sair de casa.</p>
+  <div class="sobre-conteudo">
+    <img class="foto-tecnico" src="foto.jpg" alt="Paulo Fagoto, técnico responsável pela Informática Valinhos" width="120" height="120">
+    <div>
+      <p><strong>Paulo Fagoto</strong><br>Técnico responsável</p>
+      <p>Trabalhamos com informática desde 2011. A Informática Valinhos atende de forma 100% remota, a partir de Valinhos/SP, clientes de toda a região. O contato é feito pelo WhatsApp e o atendimento acontece por acesso remoto com AnyDesk — assim resolvemos problemas de software, configuração e otimização sem que você precise sair de casa.</p>
+    </div>
+  </div>
 </section>
 
 <section>
