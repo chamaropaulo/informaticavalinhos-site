@@ -41,10 +41,21 @@
     line-height: 1.6;
   }
 
+  a:focus-visible {
+    outline: 3px solid #0a4d24;
+    outline-offset: 3px;
+  }
+
+  header {
+    text-align: center;
+    padding: 32px 0 16px;
+  }
+
   .logo {
     width: 96px;
     height: 96px;
     display: block;
+    margin: 0 auto 16px;
   }
 
   section {
@@ -53,6 +64,54 @@
     padding: 24px 28px;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  h2 {
+    margin-top: 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #168C43;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  li {
+    position: relative;
+    padding-left: 1.75em;
+    margin-bottom: 8px;
+  }
+
+  li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #168C43;
+    font-weight: bold;
+  }
+
+  ol {
+    padding-left: 1.5em;
+    margin: 0;
+  }
+
+  ol li {
+    padding-left: 0;
+    margin-bottom: 10px;
+  }
+
+  ol li::before {
+    content: none;
+  }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 16px;
+    border-top: 1px solid #d9cdb8;
+    font-size: 0.875rem;
+    color: #6b6355;
   }
 
   .botao-whatsapp {
@@ -80,6 +139,11 @@
 </header>
 
 <section>
+  <h2>Sobre nós</h2>
+  <p>A Informática Valinhos é especializada em manutenção de computadores e notebooks, com atendimento personalizado em Valinhos/SP e região. Trabalhamos com transparência, prazos claros e soluções sob medida para cada cliente — de residências a pequenos negócios.</p>
+</section>
+
+<section>
   <h2>Nossos serviços</h2>
   <ul>
     <li>Manutenção e reparo de computadores e notebooks</li>
@@ -87,6 +151,15 @@
     <li>Configuração de redes e Wi-Fi</li>
     <li>Remoção de vírus e otimização do sistema</li>
   </ul>
+</section>
+
+<section>
+  <h2>Como funciona</h2>
+  <ol>
+    <li>Você entra em contato pelo WhatsApp e descreve o problema.</li>
+    <li>Avaliamos o caso e passamos um orçamento sem compromisso.</li>
+    <li>Com o serviço aprovado, realizamos o reparo no prazo combinado.</li>
+  </ol>
 </section>
 
 <section>
