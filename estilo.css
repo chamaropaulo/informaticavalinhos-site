@@ -150,24 +150,6 @@ footer {
   height: 18px;
 }
 
-footer details {
-  margin-top: 16px;
-}
-
-footer summary {
-  cursor: pointer;
-  color: #127036;
-  font-weight: bold;
-}
-
-footer summary:hover {
-  color: #0a4d24;
-}
-
-footer details p {
-  margin-top: 8px;
-}
-
 /* ---- Listas com check (home) ---- */
 ul {
   list-style: none;
