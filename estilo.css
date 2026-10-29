@@ -245,6 +245,30 @@ h3:first-of-type {
   font-size: 0.95rem;
 }
 
+/* ---- Status de atendimento (aberto/fechado) ---- */
+.status-horario {
+  display: inline-block;
+  margin: 8px 0 0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.status-horario:empty {
+  display: none;
+}
+
+.status-aberto {
+  background: #d4edda;
+  color: #0a4d24;
+}
+
+.status-fechado {
+  background: #f8d7da;
+  color: #721c24;
+}
+
 /* ---- Responsivo (home) ---- */
 @media (max-width: 600px) {
   .sobre-conteudo {
