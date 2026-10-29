@@ -47,9 +47,12 @@ a:focus-visible {
   left: 0;
 }
 
-/* ---- Barra de status (topo) ---- */
+/* ---- Barra de status (sticky no topo) ---- */
 .status-barra {
   display: none;
+  position: sticky;
+  top: 0;
+  z-index: 50;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
@@ -60,6 +63,7 @@ a:focus-visible {
   color: #fff;
   font-size: 1rem;
   text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .status-barra.status-aberto {
@@ -97,6 +101,53 @@ a:focus-visible {
     padding: 12px 16px;
     gap: 6px;
   }
+}
+
+/* ---- Modal de aviso (atendimento fechado) ---- */
+dialog#aviso-fechado {
+  border: none;
+  border-radius: 8px;
+  padding: 24px 28px;
+  max-width: 420px;
+  width: calc(100% - 32px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  font-family: inherit;
+  color: #3f3a32;
+}
+
+dialog#aviso-fechado::backdrop {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+dialog#aviso-fechado p {
+  margin: 0 0 12px;
+}
+
+dialog#aviso-fechado p:last-of-type {
+  margin-bottom: 20px;
+}
+
+dialog#aviso-fechado button {
+  display: block;
+  background: #127036;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+dialog#aviso-fechado button:hover {
+  background: #0a4d24;
+}
+
+dialog#aviso-fechado button:focus-visible {
+  outline: 3px solid #0a4d24;
+  outline-offset: 3px;
 }
 
 /* ---- Cabeçalho ---- */

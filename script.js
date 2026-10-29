@@ -5,10 +5,14 @@
 (function () {
   'use strict';
 
-  const el = document.getElementById('status-horario');
-  if (!el) return;
+  const barra = document.getElementById('status-horario');
+  const dialog = document.getElementById('aviso-fechado');
+  const avisoProximo = document.getElementById('aviso-proximo');
+  if (!barra) return;
 
   const dias = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  let estaAberto = false;
+  let proximoTexto = '';
 
   function calcularStatus() {
     const agora = new Date();
@@ -26,42 +30,81 @@
     const minutos = hora * 60 + minuto;
     const idxDia = dias.indexOf(dia);
 
-    let aberto = false;
+    estaAberto = false;
+    proximoTexto = '';
     let detalhe = '';
 
     if (idxDia >= 1 && idxDia <= 5) {
       if (minutos >= 9 * 60 && minutos < 18 * 60) {
-        aberto = true;
+        estaAberto = true;
         detalhe = 'fecha às 18h';
       } else if (minutos < 9 * 60) {
         detalhe = 'abre hoje às 9h';
+        proximoTexto = 'hoje às 9h';
       } else if (idxDia === 5) {
         detalhe = 'abre segunda às 9h';
+        proximoTexto = 'na segunda-feira, às 9h';
       } else {
         detalhe = 'abre amanhã às 9h';
+        proximoTexto = 'amanhã, às 9h';
       }
     } else if (idxDia === 6) {
       if (minutos >= 9 * 60 && minutos < 13 * 60) {
-        aberto = true;
+        estaAberto = true;
         detalhe = 'fecha às 13h';
       } else if (minutos < 9 * 60) {
         detalhe = 'abre hoje às 9h';
+        proximoTexto = 'hoje às 9h';
       } else {
         detalhe = 'abre segunda às 9h';
+        proximoTexto = 'na segunda-feira, às 9h';
       }
     } else {
       detalhe = 'abre segunda às 9h';
+      proximoTexto = 'na segunda-feira, às 9h';
     }
 
-    if (aberto) {
-      el.className = 'status-barra status-aberto';
-      el.innerHTML = '<span class="status-ponto"></span><strong>Atendimento aberto agora</strong><span class="status-detalhe">· ' + detalhe + '</span>';
+    if (estaAberto) {
+      barra.className = 'status-barra status-aberto';
+      barra.innerHTML = '<span class="status-ponto"></span><strong>Atendimento aberto agora</strong><span class="status-detalhe">· ' + detalhe + '</span>';
     } else {
-      el.className = 'status-barra status-fechado';
-      el.innerHTML = '<span class="status-ponto"></span><strong>Atendimento fechado</strong><span class="status-detalhe">· ' + detalhe + '</span>';
+      barra.className = 'status-barra status-fechado';
+      barra.innerHTML = '<span class="status-ponto"></span><strong>Atendimento fechado</strong><span class="status-detalhe">· ' + detalhe + '</span>';
+    }
+
+    if (avisoProximo && proximoTexto) {
+      avisoProximo.textContent = 'Retornamos ' + proximoTexto + '.';
     }
   }
 
+  function interceptarWhatsApp() {
+    document.querySelectorAll('a[href*="wa.me"]').forEach(function (link) {
+      if (link.dataset.fechadoAtivo === '1') return;
+      link.dataset.fechadoAtivo = '1';
+      link.addEventListener('click', function (e) {
+        if (!estaAberto) {
+          e.preventDefault();
+          if (dialog && typeof dialog.showModal === 'function') {
+            dialog.showModal();
+          } else {
+            alert('Atendimento fechado. Horário: segunda a sexta, das 9h às 18h; sábado, das 9h às 13h.');
+          }
+        }
+      });
+    });
+  }
+
   calcularStatus();
-  setInterval(calcularStatus, 60000);
+  interceptarWhatsApp();
+  setInterval(function () {
+    calcularStatus();
+    interceptarWhatsApp();
+  }, 60000);
+
+  if (dialog) {
+    const botaoFechar = dialog.querySelector('button');
+    if (botaoFechar) {
+      botaoFechar.addEventListener('click', function () { dialog.close(); });
+    }
+  }
 })();
